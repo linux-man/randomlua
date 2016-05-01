@@ -1,8 +1,8 @@
 --[[------------------------------------
-RandomLua v0.3.1
+RandomLua v0.3.2
 Pure Lua Pseudo-Random Numbers Generator
 Under the MIT license.
-copyright(c) 2011 linux-man
+copyright(c) 2016 Caldas Lopes
 --]]------------------------------------
 
 local math_floor = math.floor
