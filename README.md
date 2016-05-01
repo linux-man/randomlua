@@ -10,12 +10,15 @@ MWC and LCG come with 3 pre-defined parameters.
 
 m = twister(seed) - Create a generator.  
 
-Usually it's better to initialize the generators without params. m = twister() call a seed tonumber(tostring(os.time()):reverse():sub(1,10))  
-A seed must be given when choosing the LCG params, as in l3 = lcg(0, 'mvc'). After that call l3:randomseed()
+Usually it's better to initialize the generators without params. m = twister() use os.time() for seed.
+A seed must be given when choosing the LCG params, as in l3 = lcg(0, 'mvc'). After that, call l3:randomseed()
 
-:random() works the same way you're used to (return a float between 0 and 1). :random(0) return the original 31 (twister) or 16 (lcg and mwc) bits integer.
+:random() returns a float between 0 and 1.
+:random(max) returns an integer between 1 and max
+:random(min, max) returns an integer between min and max
+:random(0) return the original 31 (twister) or 16 (lcg and mwc) bits integer.
 
-:randomseed(seed) to change seed. Again, randomseed() call a nice os.time seed
+:randomseed(seed) to change seed. Again, randomseed() call os.time().
 
 Code example:  
 
