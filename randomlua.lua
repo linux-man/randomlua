@@ -1,5 +1,5 @@
 --[[------------------------------------
-RandomLua v0.3.2
+RandomLua v0.4
 Pure Lua Pseudo-Random Numbers Generator
 Under the MIT license.
 copyright(c) 2016 Caldas Lopes

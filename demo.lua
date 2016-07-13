@@ -9,3 +9,4 @@ m = twister(0) -- Mersenne twister
 for n = 1, 10 do
    io.write(string.format("%16u%16u%16u%16u%16u\n", l1:random(0), l2:random(0), c1:random(0), c2:random(0), m:random(0)))
 end
+
