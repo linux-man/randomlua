@@ -1,4 +1,4 @@
-#randomlua - Pure Lua Random Generator  
+# randomlua - Pure Lua Random Generator  
 
 (c) 2016 Caldas Lopes  
 
