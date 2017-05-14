@@ -1,14 +1,14 @@
 --[[------------------------------------
-RandomLua v0.4
+RandomLua v0.3.1
 Pure Lua Pseudo-Random Numbers Generator
 Under the MIT license.
-copyright(c) 2016 Caldas Lopes
+copyright(c) 2017 linux-man
 --]]------------------------------------
 
 local math_floor = math.floor
 
-local function normalize(n) --keep numbers at 32 bits
-	return n % 0x100000000
+local function normalize(n) --keep numbers at (positive) 32 bits
+	return n % 0x80000000
 end
 
 local function bit_and(a, b)
@@ -80,7 +80,7 @@ function mersenne_twister:random(a, b)
 	y = bit_xor(y, bit_and(normalize(y * 0x8000), 0xefc60000))
 	y = bit_xor(y, math_floor(y / 0x40000))
 	self.index = (self.index + 1) % 624
-	if not a then return y / 0x100000000
+	if not a then return y / 0xffffffff
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a)
@@ -106,7 +106,7 @@ linear_congruential_generator.__index = linear_congruential_generator
 function linear_congruential_generator:random(a, b)
 	local y = (self.a * self.x + self.c) % self.m
 	self.x = y
-	if not a then return y / 0x100000000
+	if not a then return y / 0xffff
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a) end
@@ -123,10 +123,10 @@ end
 function lcg(s, r)
 	local temp = {}
 	setmetatable(temp, linear_congruential_generator)
-	temp.a, temp.c, temp.m = 1103515245, 12345, 0x100000000  --from Ansi C
+	temp.a, temp.c, temp.m = 1103515245, 12345, 0x10000  --from Ansi C
 	if r then
-		if r == 'nr' then temp.a, temp.c, temp.m = 1664525, 1013904223, 0x100000000 --from Numerical Recipes.
-		elseif r == 'mvc' then temp.a, temp.c, temp.m = 214013, 2531011, 0x100000000 end--from MVC
+		if r == 'nr' then temp.a, temp.c, temp.m = 1664525, 1013904223, 0x10000 --from Numerical Recipes.
+		elseif r == 'mvc' then temp.a, temp.c, temp.m = 214013, 2531011, 0x10000 end--from MVC
 	end
 	temp:randomseed(s)
 	return temp
@@ -142,7 +142,7 @@ function multiply_with_carry:random(a, b)
 	local y = t % m
 	self.x = y
 	self.c = math_floor(t / m)
-	if not a then return y / 0x100000000
+	if not a then return y / 0xffff
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a) end
@@ -160,10 +160,10 @@ end
 function mwc(s, r)
 	local temp = {}
 	setmetatable(temp, multiply_with_carry)
-	temp.a, temp.c, temp.m = 1103515245, 12345, 0x100000000  --from Ansi C
+	temp.a, temp.c, temp.m = 1103515245, 12345, 0x10000  --from Ansi C
 	if r then
-		if r == 'nr' then temp.a, temp.c, temp.m = 1664525, 1013904223, 0x100000000 --from Numerical Recipes.
-		elseif r == 'mvc' then temp.a, temp.c, temp.m = 214013, 2531011, 0x100000000 end--from MVC
+		if r == 'nr' then temp.a, temp.c, temp.m = 1664525, 1013904223, 0x10000 --from Numerical Recipes.
+		elseif r == 'mvc' then temp.a, temp.c, temp.m = 214013, 2531011, 0x10000 end--from MVC
 	end
 	temp.ic = temp.c
 	temp:randomseed(s)

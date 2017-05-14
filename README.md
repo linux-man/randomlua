@@ -1,6 +1,6 @@
 # randomlua - Pure Lua Random Generator  
 
-(c) 2016 Caldas Lopes  
+(c) 2017 Caldas Lopes  
 
 Mersenne twister (http://en.wikipedia.org/wiki/Mersenne_twister), very good and slow  
 Multiply-with-carry (http://en.wikipedia.org/wiki/Multiply-with-carry), probably the best option  
@@ -16,7 +16,7 @@ A seed must be given when choosing the LCG params, as in l3 = lcg(0, 'mvc'). Aft
 :random() returns a float between 0 and 1.
 :random(max) returns an integer between 1 and max
 :random(min, max) returns an integer between min and max
-:random(0) return the original 32 bits integer.
+:random(0) return the original 31 (twister) or 16 (lcg and mwc) bits integer.
 
 :randomseed(seed) to change seed. Again, randomseed() call os.time().
 
@@ -35,4 +35,3 @@ m = twister(0) -- Mersenne twister
 for n = 1, 10 do  
    io.write(string.format("%8d%8d%8d%8d%8d%8d%16u\n", l1:random(0), l2:random(0), l3:random(0), c1:random(0), c2:random(0), c3:random(0), m:random(0)))  
 end
-
