@@ -80,7 +80,7 @@ function mersenne_twister:random(a, b)
 	y = bit_xor(y, bit_and(normalize(y * 0x8000), 0xefc60000))
 	y = bit_xor(y, math_floor(y / 0x40000))
 	self.index = (self.index + 1) % 624
-	if not a then return y / 0xffffffff
+	if not a then return y / 0x7fffffff
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a)
