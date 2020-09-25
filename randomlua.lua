@@ -80,7 +80,7 @@ function mersenne_twister:random(a, b)
 	y = bit_xor(y, bit_and(normalize(y * 0x8000), 0xefc60000))
 	y = bit_xor(y, math_floor(y / 0x40000))
 	self.index = (self.index + 1) % 624
-	if not a then return y / 0xffffffff
+	if not a then return y / 0x80000000
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a)
@@ -106,7 +106,7 @@ linear_congruential_generator.__index = linear_congruential_generator
 function linear_congruential_generator:random(a, b)
 	local y = (self.a * self.x + self.c) % self.m
 	self.x = y
-	if not a then return y / 0xffff
+	if not a then return y / 0x10000
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a) end
@@ -142,7 +142,7 @@ function multiply_with_carry:random(a, b)
 	local y = t % m
 	self.x = y
 	self.c = math_floor(t / m)
-	if not a then return y / 0xffff
+	if not a then return y / 0x10000
 	elseif not b then
 		if a == 0 then return y
 		else return 1 + (y % a) end
